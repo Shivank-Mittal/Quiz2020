@@ -47,8 +47,7 @@ public class ExamDataService {
 			
 			answerDAO.create(answer);
 		}else {
-			System.out.println("Value From quesition id = " + questionDAO.getById(question.getId()));
-			System.out.println("Value From User id = " + userDAO.getById(user.getEmail()));
+			throw new ExamBusinessException();
 			
 		}
 //		otherwise : throw exception?

@@ -84,7 +84,7 @@ public class QuestionResources {
 	@Path("/{id}")
 	public String delete(@PathParam("id") Long id  ) {
 		
-		examDS.delete(id);
+		examDS.deleteQuestion(id);
 		
 		return "deleted";
 	}

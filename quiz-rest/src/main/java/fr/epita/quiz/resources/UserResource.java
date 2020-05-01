@@ -16,19 +16,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.epita.quiz.datamodel.User;
+import fr.epita.quiz.services.business.QuizSetupDataService;
 import fr.epita.quiz.services.dao.UserDAO;
 
 @Path("/user")
 public class UserResource {
 	
-	@Inject UserDAO dao;
+	@Inject
+	QuizSetupDataService examDS;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createUsers(User user)
 	{
-		 dao.create(user);
+		
+		 examDS.addUsers(user);
 		 
 		return Response.ok("created").build();
 	}
@@ -38,26 +41,28 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUsers( @PathParam("id") String id){
 		
-		System.out.println(id);
-		User users = dao.getById(id);
-		
-		return users;
+		return examDS.getUser(id) ;
 	}
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response updateUsers( User updateUser)
 	{
-		User user = dao.getById(updateUser.getLoginName());
+//		User user = dao.getById(updateUser.getLoginName());
+//		user.setEmail(updateUser.getEmail());
+		
+		User user = new User();
+		user.setLoginName(updateUser.getLoginName());
 		user.setEmail(updateUser.getEmail());
-		dao.update(user);
+		examDS.updateUser(user);
+		examDS.addUsers(user);
 		return Response.ok("Updated").build();
 	}
 	
 	@DELETE
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response deleteUser(User user) {
-		dao.delete(user);
+	@Path("/{id}")
+	public Response deleteUser(@PathParam("name") String name) {
+		examDS.deleteUser(name);
 		
 		return Response.ok("created").build();
 	}

@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
+
 import fr.epita.quiz.datamodel.Answer;
 import fr.epita.quiz.datamodel.Question;
 import fr.epita.quiz.datamodel.User;
@@ -65,7 +66,7 @@ public class QuizSetupDataService {
 	
 	
 	@Transactional(value = TxType.REQUIRED)
-	public String delete(Long id) {
+	public String deleteQuestion(Long id) {
 		Question quesDelete =  questionDAO.getById(id);
 		questionDAO.delete(quesDelete);
 		
@@ -73,7 +74,31 @@ public class QuizSetupDataService {
 	}
 	
 	
-	//public answerToMCQ(User user, MCQQuestion mcq, List<MCQChoices> choices);
+	//User CRUD Operations
+	
+	@Transactional(value = TxType.REQUIRED)
+	public void addUsers(User user) {
+		userDAO.create(user);
+	}
+	
+	
+	@Transactional(value = TxType.REQUIRED)
+	public void deleteUser(String id) {
+		  User user = userDAO.getById(id);
+		  
+		  userDAO.delete(user);
+	}
+	
+	@Transactional(value = TxType.REQUIRED)
+	public void updateUser(User user) {
+		userDAO.update(user);
+	}
+	
+	@Transactional(value = TxType.REQUIRED)
+	public User getUser(String id) {
+		User user = userDAO.getById(id);
+		return user;
+	}
 	
 
 }

@@ -123,12 +123,7 @@ public class ExamResource {
 		
 		
 		examDS.deleteAnswer(id);
-//		try {
-//			return Response.created(new URI("/rest/exam/answer/" + answer.getId())).build();
-//		} catch (URISyntaxException e) {
-//			// TODO Handle things properly
-//			e.printStackTrace();
-//		}
+		
 		return Response.ok("deleted").build();
 	
 	}
