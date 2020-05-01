@@ -108,8 +108,13 @@ public class ExamResource {
 		answer.setId(answerDTO.getId());
 		answer.setContent(answerDTO.getContent());
 		answer.setQuestion(answerDTO.getQuestion());
-		answer.setUser(answer.getUser());
+		answer.setUser(answerDTO.getUser());
+		
+		System.out.println(  "User Email is :"+answerDTO.getUser().getEmail());
+		System.out.println(  "User Email is :"+answer.getUser().getEmail());
 		adao.update(answer);
+		
+	
 		
 		return "updated";
 	}

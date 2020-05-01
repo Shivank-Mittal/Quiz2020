@@ -23,7 +23,7 @@ import fr.epita.quiz.services.dao.UserDAO;
 public class UserResource {
 	
 	@Inject
-	QuizSetupDataService examDS;
+	QuizSetupDataService QuizSetupDS;
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -31,7 +31,7 @@ public class UserResource {
 	public Response createUsers(User user)
 	{
 		
-		 examDS.addUsers(user);
+		 QuizSetupDS.addUsers(user);
 		 
 		return Response.ok("created").build();
 	}
@@ -41,7 +41,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUsers( @PathParam("id") String id){
 		
-		return examDS.getUser(id) ;
+		return QuizSetupDS.getUser(id) ;
 	}
 	
 	@PUT
@@ -51,18 +51,14 @@ public class UserResource {
 //		User user = dao.getById(updateUser.getLoginName());
 //		user.setEmail(updateUser.getEmail());
 		
-		User user = new User();
-		user.setLoginName(updateUser.getLoginName());
-		user.setEmail(updateUser.getEmail());
-		examDS.updateUser(user);
-		examDS.addUsers(user);
+		QuizSetupDS.updateUser(updateUser);
 		return Response.ok("Updated").build();
 	}
 	
 	@DELETE
 	@Path("/{id}")
 	public Response deleteUser(@PathParam("name") String name) {
-		examDS.deleteUser(name);
+		QuizSetupDS.deleteUser(name);
 		
 		return Response.ok("created").build();
 	}

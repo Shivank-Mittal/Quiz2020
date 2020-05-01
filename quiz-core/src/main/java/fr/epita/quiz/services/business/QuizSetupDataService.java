@@ -59,6 +59,8 @@ public class QuizSetupDataService {
 	
 	@Transactional(value = TxType.REQUIRED)
 	public String updateQuestion (  Question question) {
+		
+
 		questionDAO.update(question);
 		
 		return "updated";
@@ -85,17 +87,22 @@ public class QuizSetupDataService {
 	@Transactional(value = TxType.REQUIRED)
 	public void deleteUser(String id) {
 		  User user = userDAO.getById(id);
-		  
 		  userDAO.delete(user);
 	}
 	
 	@Transactional(value = TxType.REQUIRED)
 	public void updateUser(User user) {
-		userDAO.update(user);
+		User Updateuser = userDAO.getById( user.getLoginName());
+		Updateuser.setEmail(user.getEmail());
+		
+		System.out.println("Email: "+Updateuser.getEmail());
+		System.out.println("Name: "+Updateuser.getLoginName());
+//		userDAO.update(Updateuser);
 	}
 	
 	@Transactional(value = TxType.REQUIRED)
 	public User getUser(String id) {
+		
 		User user = userDAO.getById(id);
 		return user;
 	}
