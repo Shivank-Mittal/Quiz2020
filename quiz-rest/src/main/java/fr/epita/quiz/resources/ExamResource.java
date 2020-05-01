@@ -117,21 +117,12 @@ public class ExamResource {
 	//@DELETE
 	
 	@DELETE
-	@Path("/answer")
+	@Path("/answer/{id}")
 	@Consumes(value = MediaType.APPLICATION_JSON)
-	public Response removeAnswer(@RequestBody AnswerDTO answerDTO) {
+	public Response removeAnswer(@PathParam("id") long id) {
 		
 		
-
-		Answer answer = new Answer();
-		answer.setContent(answerDTO.getContent());
-		answer.setId(answerDTO.getId());
-		//dao.delete(answer);
-		
-		
-		//TODO call examDS on this answer
-		
-		examDS.deleteAnswer(answer);
+		examDS.deleteAnswer(id);
 //		try {
 //			return Response.created(new URI("/rest/exam/answer/" + answer.getId())).build();
 //		} catch (URISyntaxException e) {

@@ -80,11 +80,11 @@ public class ExamDataService {
 	
 	
 	@Transactional(value = TxType.REQUIRED)
-	public void deleteAnswer( Answer entity) {
+	public void deleteAnswer(long id) {
 		
 //		answerDAO.deleteMapping(entity.getId());
-		
-		answerDAO.deleteAnswer(entity);
+		Answer answer = answerDAO.getById(id);
+		answerDAO.delete(answer);
 //		answerDAO.delete(entity);
 	}
 }
