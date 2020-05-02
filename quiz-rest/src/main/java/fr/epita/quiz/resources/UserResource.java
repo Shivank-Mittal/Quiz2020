@@ -27,7 +27,7 @@ public class UserResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response createUsers(User user)
 	{
 		
@@ -46,6 +46,7 @@ public class UserResource {
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response updateUsers( User updateUser)
 	{
 //		User user = dao.getById(updateUser.getLoginName());
@@ -57,6 +58,7 @@ public class UserResource {
 	
 	@DELETE
 	@Path("/{id}")
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response deleteUser(@PathParam("name") String name) {
 		QuizSetupDS.deleteUser(name);
 		
