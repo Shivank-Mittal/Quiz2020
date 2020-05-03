@@ -32,7 +32,7 @@ public class QuestionResources {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response createQuestion(QuestionDTO questionDTO) {
 		
 		Question question = new Question();
@@ -45,14 +45,14 @@ public class QuestionResources {
 			examDS.addQuestion(question);
 		}
 		
-		try {
-			return Response.created(new URI("/rest/exam/question/"+question.getId())).build();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			return Response.created(new URI("/quiz-rest/rest/question/"+question.getId())).build();
+//		} catch (URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
-		return Response.ok("reached").build();
+		return Response.ok(question).build();
 		
 	}
 	

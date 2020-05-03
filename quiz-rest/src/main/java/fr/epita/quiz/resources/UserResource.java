@@ -30,18 +30,17 @@ public class UserResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response createUsers(User user)
 	{
-		
-		 QuizSetupDS.addUsers(user);
-		 
+		QuizSetupDS.addUsers(user);
 		return Response.ok("created").build();
 	}
 	
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getUsers( @PathParam("id") String id){
-		
-		return QuizSetupDS.getUser(id) ;
+	public Response getUsers( @PathParam("id") String id){
+		User user = QuizSetupDS.getUser(id) ;
+		if(user == null)return Response.noContent().build();
+		return  Response.ok(user).build();
 	}
 	
 	@PUT
